@@ -31,3 +31,33 @@ class ProductController extends Controller {
 module.exports = ProductController;
 ```
 
+## Get传参
+
+### 示例
+
+```
+async detail() {
+    const { ctx } = this;
+    ctx.body = ctx.query
+}
+```
+
+```
+// router.js
+router.get('/', controller.home.index);
+  router.get('/product', controller.product.index);
+  router.get('/product/detail', controller.product.detail);
+  router.get('/product/detail/:id', controller.product.detail2);
+```
+
+```
+// router.js
+router.get('/product/detail2/:id', controller.product.detail2);
+// product.js
+async detail2() {
+    const { ctx } = this;
+    console.log(ctx.params)
+    ctx.body = ctx.params.id
+}
+```
+

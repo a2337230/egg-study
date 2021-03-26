@@ -15,7 +15,12 @@ class ProductController extends Controller {
   async detail2() {
     const { ctx } = this;
     console.log(ctx.params)
-    ctx.body = ctx.params
+    ctx.body = ctx.params.id
+  }
+  async create() {
+    const { ctx } = this;
+    console.log(ctx.params)
+    ctx.body = ctx.request.body
   }
 }
 

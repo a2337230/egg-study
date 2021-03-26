@@ -83,3 +83,80 @@ console.log(ctx.params)
 ctx.body = ctx.request.body
 ```
 
+## Service服务
+
+### 示例
+
+```
+// product.js
+async index() {
+    const { ctx } = this;
+    let res = await ctx.service.product.index()
+    ctx.body = res;
+}
+```
+
+```
+// service/product.js
+const Service = require('egg').Service;
+
+class ProductService extends Service {
+  async index () {
+    return {
+      id: 123
+    }
+  }
+}
+
+module.exports = ProductService
+```
+
+## 模板引擎
+
+### ejs用法
+
+```
+npm i egg-view-ejs --save
+```
+
+```
+// {app_root}/config/plugin.js
+exports.ejs = {
+  enable: true,
+  package: 'egg-view-ejs',
+};
+ 
+// {app_root}/config/config.default.js
+config.view = {
+    mapping: {
+    	'.html': 'ejs',
+    },
+};
+ 
+// ejs config
+exports.ejs = {};
+```
+
+```
+async index() {
+    const { ctx } = this;
+    let res = await ctx.service.product.index()
+    // ctx.body = res;
+    await ctx.render('index.html', {
+        res
+    })
+}
+```
+
+```
+<p>id: <%=res.id%></p> 
+```
+
+## 连接数据库
+
+### 安装
+
+```
+npm i --save egg-mysql
+```
+

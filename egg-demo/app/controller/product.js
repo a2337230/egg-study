@@ -5,7 +5,11 @@ const Controller = require('egg').Controller;
 class ProductController extends Controller {
   async index() {
     const { ctx } = this;
-    ctx.body = 'hi, product';
+    let res = await ctx.service.product.index()
+    // ctx.body = res;
+    await ctx.render('index.html', {
+      res
+    })
   }
   async detail() {
     const { ctx } = this;
